@@ -32,5 +32,10 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="D:/MyEclipse 2017 CI/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/catalina.jar">
+		<attributes>
+			<attribute name="me-identifier" value="lib//catalina.jar"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
