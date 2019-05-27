@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="category_")
+@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" }) 
 public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,5 +33,8 @@ public class Category {
 	}
 	
 	
-
+    public String toString(){
+    	return "Category[id123="+id+",name="+name+"]";
+    }
+	
 }
