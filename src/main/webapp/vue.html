@@ -1,0 +1,19 @@
+<script src="js/fetch.min.js"></script>
+ <meta http-equiv="content-type" content="text/html"  charset="utf-8">
+<div id="hero">
+  
+</div>
+  
+<script>
+var url = "json.txt"
+fetch(url).then(function(response) {
+    response.json().then(function (jsonObject) {
+        var jsonString = JSON.stringify(jsonObject)
+        document.getElementById("hero").innerHTML = "通过fetch获取到的json数据："+ jsonString;
+    })
+}).catch(function(err){
+    console.log("Fetch错误:"+err);
+})
+  
+</script>
+双击选中所有代码

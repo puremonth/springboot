@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springboot.dao.CategoryDAO;
 import springboot.mapper.CategoryMapper;
 import springboot.pojo.Category;
-@RestController
+@Controller
 public class CategoryController {
 
 	
@@ -51,15 +51,19 @@ public class CategoryController {
 	*/
 	 
 	 @GetMapping("/categories")
-	    public List<Category> listCategory(Model m,@RequestParam(value = "start", defaultValue = "0") int start,@RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
+	    public String listCategory(Model m,@RequestParam(value = "start", defaultValue = "0") int start,@RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
 	        start = start<0?0:start;
 	        Sort sort = new Sort(Sort.Direction.DESC, "id");
 	        Pageable pageable = new PageRequest(start, size, sort);
 	        Page<Category> page =categoryDAO.findAll(pageable);
 	        m.addAttribute("page", page);
-	        return page.getContent();
+	        return "listCategory";   
 	    }
-	 
+	 @RequestMapping("/hello1")
+	    public String hello() throws Exception {
+	      
+	        return "hello1";   
+	    }
 	 
 	/*@PostMapping("/categories")
 	public String addCategory(Category c){
@@ -112,11 +116,11 @@ public class CategoryController {
 	        return c;
 	    }
 	 
-	@PutMapping("/categories")
+	/*@PutMapping("/categories")
 	
 	public void addCategory(@RequestBody Category category)throws Exception{
 		
 		System.out.println("springboot接受到浏览器以json格式提交的数据:"+category);
-	}
+	}*/
 	
 }
