@@ -112,7 +112,7 @@ public class CategoryController {
 	 @GetMapping("/categories/{id}")
 	    public Category getCategory(@PathVariable("id") int id) throws Exception {
 	        Category c= categoryDAO.getOne(id);
-	        System.out.println(c);
+	      
 	        return c;
 	    }
 	 

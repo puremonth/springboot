@@ -1,7 +1,15 @@
+ <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  <%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
 <head>
+<base href="<%=basePath%>">
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -30,40 +38,40 @@
 </head>
 <body>
 <div class="page-container">
-	<form action="product-list" method="post" class="form form-horizontal" id="form-article-add" onsubmit="window.opener=null;window.close();" >
-	
+	<form action="product-list/${p.id}" method="post" class="form form-horizontal" id="form-article-add" >
+	          <input type="hidden" name="_method" value="PUT">
 	    	<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">产品名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="productname">
+				<input type="text" class="input-text" value="${p.productname}" placeholder="" id="" name="productname">
 			</div>
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><!-- <span class="c-red">*</span> -->采购日期：</label>
+			<label class="form-label col-xs-4 col-sm-2">采购日期：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-			    <input type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="datemin" class="input-text Wdate" name="ordertime">
+			    <input type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="datemin" class="input-text Wdate" name="ordertime" value="${p.ordertime}">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">供应商：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="supplier">
+			<div class="formControls col-xs-8 col-sm-9" >
+				<input type="text" class="input-text" value="${p.supplier}" placeholder="" id="" name="supplier">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">供应商联系方式1：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="suppliernum1">
+				<input type="text" class="input-text" value="${p.suppliernum1 }" placeholder="" id="" name="suppliernum1">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">供应商联系方式2：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="suppliernum2">
+				<input type="text" class="input-text" value="${p.suppliernum2}" placeholder="" id="" name="suppliernum2">
 			</div>
 		</div>
 		
@@ -71,49 +79,49 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">品牌/规格/型号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="productbrand">
+				<input type="text" class="input-text" value="${p.productbrand}" placeholder="" id="" name="productbrand">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">参数：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="parameter">
+				<input type="text" class="input-text" value="${p.parameter}" placeholder="" id="" name="parameter">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">单位：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="unit">
+				<input type="text" class="input-text" value="${p.unit}" placeholder="" id="" name="unit">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">订单类型：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="ordertype">
+				<input type="text" class="input-text" value="${p.ordertype}" placeholder="" id="" name="ordertype">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">含税单价：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="unitprice">
+				<input type="text" class="input-text" value="${p.unitprice}" placeholder="" id="" name="unitprice">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">未税单价：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="unitpriceouttax">
+				<input type="text" class="input-text" value="${p.unitpriceouttax}" placeholder="" id="" name="unitpriceouttax">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">质保期：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="guaranteeperiod">
+				<input type="text" class="input-text" value="${p.guaranteeperiod}" placeholder="" id="" name="guaranteeperiod">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">合同编号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="contractno">
+				<input type="text" class="input-text" value="${p.contractno}" placeholder="" id="" name="contractno">
 			</div>
 		</div>
 		
@@ -284,7 +292,7 @@
 		
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save_submit();" class="btn btn-primary radius" type="onsubmit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+				<button onClick="article_save_update();" class="btn btn-primary radius" type="onsubmit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
 				<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
 				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
@@ -312,45 +320,35 @@
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script>
 
-function article_save_submit(){
+function article_save_update(){
 
 
-  $.ajax({
+   $.ajax({
                     type:"post",
-                    url:"",
+                    url:"product-list.jsp",
                     data: $('form'),//表单数据
                     success:function(d){
-                      if(d=="success"){
-                            
+                   
+                     
                         /*  var index = parent.layer.getFrameIndex(window.name);
-                         parent.layer.close(index) */
-                            layer.msg('保存成功！');//保存成功提示
-                            
-                       }
+                         parent.layer.close(index)
+                         layer.msg('保存成功！');//保存成功提示 
+                           
+                       
                         if(d=="error"){
                             layer.msg('保存异常!');
-                        
-                        }
-                       
-                    
-                    window.parent.location.reload();
-			        parent.layer.closeAll('iframe');
-                    layer.closeAll();//关闭弹窗
-                       
-                       // var index = parent.layer.getFrameIndex(window.name);
-                       //  parent.layer.close(index) 
-                      //   window.opener.location.reload();
-		          //  window.close(); 
-                      
+                           
+                        } */
+                        window.parent.location.reload();
+			            parent.layer.closeAll('iframe');
+                     // layer.closeAll();//关闭弹窗
+                      // layer.closeAll('iframe');//关闭弹窗
                     }
-                    
                 });
-               
-               
               }
 
 
-
+ 
 </script>
 <script type="text/javascript">
 $(function(){

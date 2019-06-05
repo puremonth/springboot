@@ -40,7 +40,8 @@
 			<input type="text" name="" id="" placeholder=" 产品名称" style="width:250px" class="input-text">
 			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜产品</button>
 		</div>
-		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="product_add('添加产品','product-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+		 <a class="btn btn-primary radius" onclick="product_add('添加产品','product-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
 		<div class="mt-20">
 			<table class="table table-border table-bordered table-bg table-hover table-sort">
 				<thead>
@@ -49,10 +50,9 @@
 						<th width="">ID</th>
 						<th width="">产品名称</th>
 						<th width="">采购日期</th>
-						<th>供应商</th>
+						<th width="">供应商</th>
 						<th width="">供应商联系方式1</th>
 						<th width="">供应商联系方式2</th>
-						<th width="">产品名称</th>
 	                    <th width="">品牌/规格/型号</th>
 	                    <th width="">参数</th>
 	                    <th width="">单位</th>
@@ -61,7 +61,7 @@
 	                    <th width="">未税单价</th>
 	                    <th width="">质保期</th>
 	                    <th width="">合同编号</th>
-	                    
+	                    <th width="">操作</th>
 	
 					</tr>
 				</thead>
@@ -73,14 +73,29 @@
 						<td><input name="" type="checkbox" value=""></td>
 						<td>${c.id}</td>
 						<td>${c.productname}</td>
-						<td><a onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;"><img width="60" class="product-thumb" src="temp/product/Thumb/6204.jpg"></a></td>
-						<td class="text-l"><a style="text-decoration:none" onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;"><img title="国内品牌" src="static/h-ui.admin/images/cn.gif"> <b class="text-success">圣象</b> 哥本哈根橡木地板KS8373</a></td>
-						<td class="text-l">原木的外在,实木条形结构,色泽花纹自然,写意;款式设计吸取实木地板的天然去雕饰之美,在视觉上给人带来深邃联想.多款产品适合搭配不同的风格的室内装饰;功能流露出尊贵典雅的大气韵味。</td>
-						<td><span class="price">356.0</span> 元/平米</td>
-						<td class="td-status"><span class="label label-success radius">已发布</span></td>
-						<td class="td-manage"><a style="text-decoration:none" onClick="product_stop(this,'10001')" href="javascript:;" title="下架">
-						<i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_edit('产品编辑','product-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
-						 <a style="text-decoration:none" class="ml-5" onClick="product_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+						<td><fmt:formatDate value="${c.ordertime}" pattern="yyyy年MM月dd日"/></td>
+						<td>${c.supplier}</td>
+						<td>${c.suppliernum1 }</td>
+						<td>${c.suppliernum2}</td>
+						<td>${c.productbrand}</td>
+						<td>${c.parameter}</td>
+						<td>${c.unit}</td>
+						<td>${c.ordertype}</td>
+						<td>${c.unitprice}</td>
+						<td>${c.unitpriceouttax}</td>
+						<td>${c.guaranteeperiod}</td>
+						<td>${c.contractno}</td>
+						<td class="td-manage">
+						 <a style="text-decoration:none" class="ml-5" onClick="product_edit('产品编辑','product-list/${c.id}','${c.id}')" method="get"
+						 href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+						  
+						 <a style="text-decoration:none"  onClick="product_del(this,'product-del/${c.id}')" href="javascript:;" title="删除"  >
+						 <i class="Hui-iconfont">&#xe6e2;</i></a></td>								
+                          
+						<!-- <td class="td-manage"><a style="text-decoration:none" onClick="product_stop(this,'10001')" href="javascript:;" title="下架">
+						<i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_edit('产品编辑','product-add.html','10001')"
+						 href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+						 <a style="text-decoration:none" class="ml-5" onClick="product_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td> -->
 					</tr>
 					</c:forEach>
 					
@@ -227,22 +242,54 @@ function product_shenqing(obj,id){
 
 /*产品-编辑*/
 function product_edit(title,url,id){
+
+
+
+
 	var index = layer.open({
 		type: 2,
 		title: title,
 		content: url
 	});
 	layer.full(index);
+	
+/*  $.ajax({
+                    type:"post",
+                    url:url,
+                    data: $('form'),//表单数据
+                    success:function(d){
+                   
+                     
+                         var index = parent.layer.getFrameIndex(window.name);
+                         parent.layer.close(index)
+                            layer.msg('保存成功！');//保存成功提示
+                           
+                       
+                        if(d=="error"){
+                            layer.msg('保存异常!');
+                           
+                        }
+                        layer.closeAll('iframe');//关闭弹窗
+                    }
+                });
+               */
+	
+	
+	
 }
 
 /*产品-删除*/
 function product_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
+                  
 		$.ajax({
+		
 			type: 'POST',
-			url: '',
-			dataType: 'json',
+			url:id,
+			/* dataType: ${'json'}, */
+			
 			success: function(data){
+			   
 				$(obj).parents("tr").remove();
 				layer.msg('已删除!',{icon:1,time:1000});
 			},
