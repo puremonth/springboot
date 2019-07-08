@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import springboot.pojo.Product;
 
-public interface ProductDAO extends  JpaRepository<Product,Integer>{
-	
-}
+public interface  ProductALLDAO extends JpaRepository<Product,Integer> {
 
+}

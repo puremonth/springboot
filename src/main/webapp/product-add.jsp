@@ -1,3 +1,6 @@
+ <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
@@ -30,23 +33,20 @@
 </head>
 <body>
 <div class="page-container">
-	<form action="product-list" method="post" class="form form-horizontal" id="form-article-add" onsubmit="window.opener=null;window.close();" >
+	<form  method="post" class="form form-horizontal" id="form-article-add">
 	
-	    	<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">产品名称：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="productname">
-			</div>
-		</div>
+	    
+		
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><!-- <span class="c-red">*</span> -->采购日期：</label>
+			<label class="form-label col-xs-4 col-sm-2">采购日期：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 			    <input type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="datemin" class="input-text Wdate" name="ordertime">
 			</div>
 		</div>
 		
-		<div class="row cl">
+		
+			<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">供应商：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="supplier">
@@ -54,42 +54,31 @@
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">供应商联系方式1：</label>
+			<label class="form-label col-xs-4 col-sm-2">产品名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="suppliernum1">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="productname">
 			</div>
 		</div>
 		
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">供应商联系方式2：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="suppliernum2">
-			</div>
-		</div>
-		
-	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">品牌/规格/型号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="productbrand">
 			</div>
 		</div>
+		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">参数：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="parameter">
 			</div>
 		</div>
+		
+	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">单位：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="unit">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">订单类型：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="ordertype">
 			</div>
 		</div>
 		<div class="row cl">
@@ -111,9 +100,27 @@
 			</div>
 		</div>
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">订单类型：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="ordertype">
+			</div>
+		</div>
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">合同编号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="contractno">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">供应商联系方式1：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="suppliernum1">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">供应商联系方式2：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="suppliernum2">
 			</div>
 		</div>
 		
@@ -314,45 +321,86 @@
 
 function article_save_submit(){
 
+$('#form-article-add').ajaxSubmit({
+type:"POST",
+url:"product-listsave",
+async:false,
+//data:$('#form-article-add').resialize(),
+success:function(){
+         // alert(1);
+         // console.log(12);
+         window.parent.location.reload();
+         parent.layer.closeAll('iframe');
+        
 
-  $.ajax({
+}
+
+})
+
+/* document.getElementById("#form-article-add").action="product-listsave";
+document.getElementById("#form-article-add").submit();
+alert(1); */
+//parent.layer.closeAll('iframe');
+
+  /* $.ajax({
                     type:"post",
-                    url:"",
+                    url:"product-list",
                     data: $('form'),//表单数据
+                    async:false,
                     success:function(d){
-                      if(d=="success"){
-                            
-                        /*  var index = parent.layer.getFrameIndex(window.name);
-                         parent.layer.close(index) */
-                            layer.msg('保存成功！');//保存成功提示
-                            
+              // alert("1");
+                     /*  if(d=="success"){
+                           //  window.opener.location.reload();
+                          var index = parent.layer.getFrameIndex(window.name);
+                         parent.layer.close(index) 
+                            layer.msg('保存成功！');//保存成功提示d
+                            console.log("成功");
                        }
                         if(d=="error"){
                             layer.msg('保存异常!');
-                        
+                         console.log("失败");
                         }
-                       
+                       window.parent.location.reload();
+			parent.layer.closeAll('iframe');
                     
-                    window.parent.location.reload();
-			        parent.layer.closeAll('iframe');
-                    layer.closeAll();//关闭弹窗
-                       
-                       // var index = parent.layer.getFrameIndex(window.name);
-                       //  parent.layer.close(index) 
-                      //   window.opener.location.reload();
-		          //  window.close(); 
+                    //window.parent.location.reload();
+                    console.log("没走"); 
+			    //  parent.layer.closeAll('iframe');
+			        
+			    // return false;
+                  // layer.closeAll();//关闭弹窗
                       
+              //    window.opener.location.reload();
+                //  parent.layer.closeAll('iframe');
+                  //  window.close(); 
+                    //    var index = parent.layer.getFrameIndex(window.name);
+                      //  parent.layer.close(index)
+                   
+		                   
+		       //  window.parent.location.reload();  
+		           // alert(12);   
+                 //   parent.layer.closeAll('iframe'); 
+                
+			    
                     }
                     
+                    
                 });
+             */
                
-               
+              
+			 
               }
 
 
 
 </script>
-<script type="text/javascript">
+<script>
+
+
+</script>
+
+<!-- <script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
@@ -1042,6 +1090,6 @@ $(function(){
 
 
 
-</script>
+</script> -->
 </body>
 </html>

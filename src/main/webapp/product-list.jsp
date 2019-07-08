@@ -40,27 +40,41 @@
 			<input type="text" name="" id="" placeholder=" 产品名称" style="width:250px" class="input-text">
 			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜产品</button>
 		</div>
-		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-		 <a class="btn btn-primary radius" onclick="product_add('添加产品','product-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="product_del(this,'product-del')"  class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+		 <a class="btn btn-primary radius" onclick="product_add('添加产品','product-add')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a>
+		 <a class="btn btn-primary radius"  href="product-export">导出产品</a>
+		
+		<!--  <a href="product-import" enctype="multipart/form-data" method="post">导入产品</a> -->
+	<form   enctype="multipart/form-data" method="post" action="product-import" style="display:inline-block"><span class="btn
+	btn-primary radius">导入产品</span>
+		<a class="btn btn-primary radius" >
+		<input type="file" name="file"/>
+          <input type="submit" value="上传"/>
+         </a>
+         </form>
+         
+         <span>&nbsp &nbsp &nbsp &nbsp 
+         
+		 </span> <span style="margin-top:5px;" class="r">共有数据：<strong>${page.totalElements}</strong> 条</span> </div>
 		<div class="mt-20">
 			<table class="table table-border table-bordered table-bg table-hover table-sort">
 				<thead>
 					<tr class="text-c">
 						<th width=""><input name="" type="checkbox" value=""></th>
-						<th width="">ID</th>
-						<th width="">产品名称</th>
+						<th width="">Id</th>
 						<th width="">采购日期</th>
 						<th width="">供应商</th>
-						<th width="">供应商联系方式1</th>
-						<th width="">供应商联系方式2</th>
-	                    <th width="">品牌/规格/型号</th>
-	                    <th width="">参数</th>
+						<th width="">产品名称</th>
+						<th width="">品牌/规格/型号</th>
+						<th width="">参数</th>
 	                    <th width="">单位</th>
-	                    <th width="">订单类型</th>
 	                    <th width="">含税单价</th>
 	                    <th width="">未税单价</th>
 	                    <th width="">质保期</th>
+	                    <th width="">订单类型</th>
 	                    <th width="">合同编号</th>
+	                    <th width="">供应商联系方式1</th>
+	                    <th width="">供应商联系方式2</th>
 	                    <th width="">操作</th>
 	
 					</tr>
@@ -70,26 +84,26 @@
 				   <c:forEach items="${page.content}" var="c" varStatus="st">
 				 
 					<tr class="text-c va-m">
-						<td><input name="" type="checkbox" value=""></td>
+						<td><input name="checkid" type="checkbox" value="${c.id}" ></td>
 						<td>${c.id}</td>
-						<td>${c.productname}</td>
 						<td><fmt:formatDate value="${c.ordertime}" pattern="yyyy年MM月dd日"/></td>
 						<td>${c.supplier}</td>
-						<td>${c.suppliernum1 }</td>
-						<td>${c.suppliernum2}</td>
-						<td>${c.productbrand}</td>
+						<td>${c.productname}</td>
+						<td>${c.productbrand }</td>
 						<td>${c.parameter}</td>
 						<td>${c.unit}</td>
-						<td>${c.ordertype}</td>
 						<td>${c.unitprice}</td>
 						<td>${c.unitpriceouttax}</td>
 						<td>${c.guaranteeperiod}</td>
+						<td>${c.ordertype}</td>
 						<td>${c.contractno}</td>
+						<td>${c.suppliernum1}</td>
+						<td>${c.suppliernum2}</td>
 						<td class="td-manage">
 						 <a style="text-decoration:none" class="ml-5" onClick="product_edit('产品编辑','product-list/${c.id}','${c.id}')" method="get"
 						 href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
 						  
-						 <a style="text-decoration:none"  onClick="product_del(this,'product-del/${c.id}')" href="javascript:;" title="删除"  >
+						 <a style="text-decoration:none"  onClick="product_del(this,'product-del')" href="javascript:;" title="删除"  >
 						 <i class="Hui-iconfont">&#xe6e2;</i></a></td>								
                           
 						<!-- <td class="td-manage"><a style="text-decoration:none" onClick="product_stop(this,'10001')" href="javascript:;" title="下架">
@@ -101,6 +115,18 @@
 					
 				</tbody>
 			</table>
+			 <div style="margin-top:66px">
+				<jsp:include page="page.jsp"/>
+				</div>  
+<%-- <div>
+<div style="margin-top:36px">
+ <a href="?start=0">[首页]</a>
+ <a href="?start=${page.number-1}">[上一页]</a>
+ <a href="?start=${page.number+1}">[下一页]</a>
+ <a href="?start=${page.totalPages-1}">[末页]</a>
+ </div>
+ </div>  --%>
+			
 		</div>
 	</div>
 </div>
@@ -115,8 +141,10 @@
 <script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script> 
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+ <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
+
+
 var setting = {
 	view: {
 		dblClickExpand: false,
@@ -278,20 +306,41 @@ function product_edit(title,url,id){
 	
 }
 
+
+
+
+
 /*产品-删除*/
 function product_del(obj,id){
+
+var ids='';
+$('input:checkbox').each(function(){
+if(this.checked==true){
+    ids+=this.value+',';
+ 
+}
+
+
+});
+
 	layer.confirm('确认要删除吗？',function(index){
+	
+
+             
+             
                   
 		$.ajax({
 		
 			type: 'POST',
 			url:id,
-			/* dataType: ${'json'}, */
-			
+		   // dataType:'json', 
+			data:{ids:ids},
 			success: function(data){
-			   
+			 // alert(ids);
 				$(obj).parents("tr").remove();
 				layer.msg('已删除!',{icon:1,time:1000});
+				   window.location.reload();
+			//parent.layer.closeAll('iframe');
 			},
 			error:function(data) {
 				console.log(data.msg);

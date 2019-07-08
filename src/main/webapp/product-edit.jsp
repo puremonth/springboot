@@ -38,60 +38,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 <div class="page-container">
-	<form action="product-list/${p.id}" method="post" class="form form-horizontal" id="form-article-add" >
+	<form  action="product-listupdate/${p.id}" method="post"  class="form form-horizontal" id="form-article-add" >
 	          <input type="hidden" name="_method" value="PUT">
 	    	<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">产品名称：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${p.productname}" placeholder="" id="" name="productname">
-			</div>
-		</div>
-		
-		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">采购日期：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-			    <input type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="datemin" class="input-text Wdate" name="ordertime" value="${p.ordertime}">
+				 <input type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="datemin" class="input-text Wdate" name="ordertime" value="${p.ordertime}">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">供应商：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+			  <input type="text" class="input-text" value="${p.supplier}" placeholder="" id="" name="supplier">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品名称：</label>
 			<div class="formControls col-xs-8 col-sm-9" >
-				<input type="text" class="input-text" value="${p.supplier}" placeholder="" id="" name="supplier">
+				<input type="text" class="input-text" value="${p.productname}" placeholder="" id="" name="productname">
 			</div>
 		</div>
 		
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">供应商联系方式1：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${p.suppliernum1 }" placeholder="" id="" name="suppliernum1">
-			</div>
-		</div>
-		
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">供应商联系方式2：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${p.suppliernum2}" placeholder="" id="" name="suppliernum2">
-			</div>
-		</div>
-		
-	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">品牌/规格/型号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="${p.productbrand}" placeholder="" id="" name="productbrand">
 			</div>
 		</div>
+		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">参数：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="${p.parameter}" placeholder="" id="" name="parameter">
 			</div>
 		</div>
+		
+	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">单位：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="${p.unit}" placeholder="" id="" name="unit">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">含税单价：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="${p.unitprice}" placeholder="" id="" name="unitprice">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">未税单价：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="${p.unitpriceouttax}" placeholder="" id="" name="unitpriceouttax">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">质保期：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="${p.guaranteeperiod}" placeholder="" id="" name="guaranteeperiod">
 			</div>
 		</div>
 		<div class="row cl">
@@ -101,27 +109,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">含税单价：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${p.unitprice}" placeholder="" id="" name="unitprice">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">未税单价：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${p.unitpriceouttax}" placeholder="" id="" name="unitpriceouttax">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">质保期：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${p.guaranteeperiod}" placeholder="" id="" name="guaranteeperiod">
-			</div>
-		</div>
-		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">合同编号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="${p.contractno}" placeholder="" id="" name="contractno">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">供应商联系方式1：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="${p.suppliernum1}" placeholder="" id="" name="suppliernum1">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">供应商联系方式2：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="${p.suppliernum2}" placeholder="" id="" name="suppliernum2">
 			</div>
 		</div>
 		
@@ -320,7 +323,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script>
 
-function article_save_update(){
+ function article_save_update(){
 
 
    $.ajax({
@@ -330,7 +333,7 @@ function article_save_update(){
                     success:function(d){
                    
                      
-                        /*  var index = parent.layer.getFrameIndex(window.name);
+                         /*  var index = parent.layer.getFrameIndex(window.name);
                          parent.layer.close(index)
                          layer.msg('保存成功！');//保存成功提示 
                            
@@ -339,18 +342,37 @@ function article_save_update(){
                             layer.msg('保存异常!');
                            
                         } */
-                        window.parent.location.reload();
+                        
+                          window.parent.location.reload();
 			            parent.layer.closeAll('iframe');
+                        
                      // layer.closeAll();//关闭弹窗
                       // layer.closeAll('iframe');//关闭弹窗
                     }
                 });
-              }
+              } 
 
 
+
+/* $('#form-article-add').ajaxSubmit({
+type:"POST",
+url:"product-list/${p.id}",
+async:false,
+//data:$('#form-article-add').resialize(),
+success:function(){
+         // alert(1);
+         // console.log(12);
+         window.parent.location.reload();
+           parent.layer.closeAll('iframe');
+        
+
+}
+
+})
+} */
  
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
@@ -1040,6 +1062,6 @@ $(function(){
 
 
 
-</script>
+</script> -->
 </body>
 </html>
